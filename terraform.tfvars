@@ -1,5 +1,5 @@
 google_config = {
-  credentials_file = "path/to/credentials.json"
+  credentials_file = "/Users/jay.kasinathan/Documents/Github/looker_automation/river-dynamo-396718-9e0759525f2f.json"
   project_id       = "river-dynamo-396718"
   region           = "us-central1"
 }
