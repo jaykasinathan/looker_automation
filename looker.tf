@@ -1,26 +1,25 @@
 resource "google_looker_instance" "looker-instance" {
-  name               = "jay-looker-demo"
-  platform_edition   = "LOOKER_CORE_TRIAL"
-  region             = "us-central1"
-  public_ip_enabled  = true
-#   admin_settings {
-#     allowed_email_domains = ["google.com"]
-#   }
+  name               = var.looker_instance_config.name
+  platform_edition   = var.looker_instance_config.platform_edition
+  region             = var.google_config.region
+  public_ip_enabled  = var.looker_instance_config.public_ip_enabled
+  admin_settings {
+    allowed_email_domains = var.looker_instance_config.allowed_email_domains
+  }
   maintenance_window {
-    day_of_week = "THURSDAY"
+    day_of_week = var.maintenance_window_config.day_of_week
     start_time {
-      hours   = 22
-      minutes = 0
-      seconds = 0
-      nanos   = 0
+      hours   = var.maintenance_window_config.start_time.hours
+      minutes = var.maintenance_window_config.start_time.minutes
+      seconds = var.maintenance_window_config.start_time.seconds
+      nanos   = var.maintenance_window_config.start_time.nanos
     }
   }
   oauth_config {
-    client_id = "755402981465-tvj1m2ke7hrj3q54qu3ed28an6rcg1p8.apps.googleusercontent.com"
-    client_secret = "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"
+    client_id     = var.oauth_config.client_id
+    client_secret = var.oauth_config.client_secret
   }
 }
-
 # provisioner "local-exec" {
 #   command = "python3 looker_automation.py"
 #   environment = {
