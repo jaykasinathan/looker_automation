@@ -25,5 +25,6 @@ resource "google_looker_instance" "looker-instance" {
 #   environment = {
 #     LOOKER_CLIENT_ID     = "your_client_id"
 #     LOOKER_CLIENT_SECRET = "your_client_secret"
+#     LOOKER_INSTANCE_NAME = looker_instance_name 
 #   }
 # }

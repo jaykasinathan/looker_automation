@@ -8,7 +8,7 @@ looker_instance_config = {
   name               = "jay-looker-demo"
   platform_edition   = "LOOKER_CORE_TRIAL"
   public_ip_enabled  = true
-  allowed_email_domains = ["google.com","gmail.com"]
+  allowed_email_domains = ["google.com","gmail.com","sada.com"]
 }
 
 maintenance_window_config = {
