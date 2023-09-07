@@ -20,11 +20,21 @@ resource "google_looker_instance" "looker-instance" {
     client_secret = var.oauth_config.client_secret
   }
 }
-# provisioner "local-exec" {
-#   command = "python3 looker_automation.py"
-#   environment = {
-#     LOOKER_CLIENT_ID     = "your_client_id"
-#     LOOKER_CLIENT_SECRET = "your_client_secret"
-#     LOOKER_INSTANCE_NAME = looker_instance_name 
-#   }
-# }
+provisioner "local-exec" {
+  command = "python3 looker_automation.py"
+  environment = {
+    LOOKER_CLIENT_ID     = "your_client_id"
+    LOOKER_CLIENT_SECRET = "your_client_secret"
+    LOOKER_INSTANCE_NAME = looker_instance_name 
+  }
+}
+
+resource "null_resource" "run_python_script" {
+  triggers = {
+    looker_instance_url = google_looker_instance.looker-instance.looker_uri
+  }
+
+  provisioner "local-exec" {
+    command = "python3 looker_automation.py --looker-url ${triggers.looker_instance_url}"
+  }
+}
