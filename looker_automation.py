@@ -1,17 +1,22 @@
 import requests
 import json
+import os 
 
-# Step 1: Authenticate with Looker
-LOOKER_URL = "https://sadasystems.looker.com/"  
-CLIENT_ID = "D2q66HgCR5pMQmtBQjC8"
-CLIENT_SECRET = "6Pdd3zwPBVMmrXG9dtyhBRmC"
+# Step 1: Authenticate with Looker API
+
+looker_url = os.environ.get('LOOKER_URL')
+client_id = os.environ.get('CLIENT_ID')
+client_secret = os.environ.get('CLIENT_SECRET')
+looker_url = "https://fd0b0f3a-62c5-43c0-8f78-2dfb20ee13d3.looker.app"
+client_id = "KVwtSRpDKTWMWXwWv6dG"
+client_secret = "kDzjt5xjW9vm2w8fDXWZXMby"
 
 auth_payload = {
-    "client_id": CLIENT_ID,
-    "client_secret": CLIENT_SECRET
+    "client_id": client_id,
+    "client_secret": client_secret
 }
 
-auth_response = requests.post(f"{LOOKER_URL}/api/4.0/login", data=auth_payload)
+auth_response = requests.post(f"{looker_url}/api/4.0/login", data=auth_payload)
 if auth_response.status_code != 200:
     print("Authentication failed.")
     exit(1)
@@ -32,7 +37,7 @@ for connection_name, connection_details in connection_data.items():
         "name": connection_name,
         **connection_details
     }
-    connection_response = requests.post(f"{LOOKER_URL}/api/4.0/connections", headers=headers, json=connection_payload)
+    connection_response = requests.post(f"{looker_url}/api/4.0/connections", headers=headers, json=connection_payload)
     if connection_response.status_code != 200:
         print(f"Connection {connection_name} creation failed.")
     else:
@@ -46,7 +51,7 @@ project_payload = {
     "git_service_name": "github"
 }
 
-project_response = requests.post(f"{LOOKER_URL}/api/4.0/projects", headers=headers, json=project_payload)
+project_response = requests.post(f"{looker_url}/api/4.0/projects", headers=headers, json=project_payload)
 if project_response.status_code != 200:
     print("Project import failed.")
     exit(1)

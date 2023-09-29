@@ -1,12 +1,4 @@
 {
-    "postgres_connection": {
-        "dialect": "postgresql",
-        "host": "your_db_host",
-        "port": "5432",
-        "database": "your_db",
-        "user": "your_db_user",
-        "password": "your_db_password"
-    },
     "jay_postgres_connection": {
         "dialect_name": "postgres",
         "host": "10.148.1.3",
